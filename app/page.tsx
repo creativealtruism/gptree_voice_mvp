@@ -58,12 +58,12 @@ export default function ChatGPTreeVoice() {
     [submitText]
   );
 
-  // Show loading state
+  // Show a gentle loading state
   if (!isLoaded) {
     return (
       <AppShell>
         <div className="flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-primary/20 animate-pulse" />
+          <div className="w-20 h-20 rounded-full bg-primary/10 animate-breathe" />
         </div>
       </AppShell>
     );
@@ -71,51 +71,62 @@ export default function ChatGPTreeVoice() {
 
   return (
     <AppShell>
-      <div className="flex flex-col items-center gap-8 w-full max-w-md">
-        {/* Voice status and response */}
-        <VoiceStatus
-          voiceState={voiceState}
-          transcript={transcript}
-          response={response}
-          error={error}
-        />
+      <div className="flex flex-col items-center w-full max-w-md">
+        {/* Top section - voice status, positioned above acorn */}
+        <div className="mb-6">
+          <VoiceStatus
+            voiceState={voiceState}
+            transcript={transcript}
+            response={response}
+            error={error}
+          />
+        </div>
 
-        {/* Central acorn/tree button */}
-        <VoiceAcornButton
-          treeStage={treeStage}
-          treeRings={treeRings}
-          voiceState={voiceState}
-          onPress={handleAcornPress}
-        />
+        {/* Central focus - the living acorn */}
+        <div className="my-4">
+          <VoiceAcornButton
+            treeStage={treeStage}
+            treeRings={treeRings}
+            voiceState={voiceState}
+            onPress={handleAcornPress}
+          />
+        </div>
 
-        {/* Text fallback input */}
-        <TextFallback
-          isVoiceSupported={isVoiceSupported}
-          onSubmit={handleTextSubmit}
-          disabled={voiceState !== "idle"}
-        />
+        {/* Subtle growth indicator - only visible after first conversation */}
+        <div className="mt-8 mb-4">
+          <GrowthState
+            treeStage={treeStage}
+            conversationCount={conversationCount}
+            progressToNext={getProgressToNextStage()}
+          />
+        </div>
 
-        {/* Growth state indicator */}
-        <GrowthState
-          treeStage={treeStage}
-          conversationCount={conversationCount}
-          progressToNext={getProgressToNextStage()}
-        />
+        {/* Text fallback - minimal, graceful */}
+        <div className="my-4">
+          <TextFallback
+            isVoiceSupported={isVoiceSupported}
+            onSubmit={handleTextSubmit}
+            disabled={voiceState !== "idle"}
+          />
+        </div>
 
-        {/* Plant tree CTA */}
-        <PlantTreeCTA plantedTrees={plantedTrees} onPlantSimulated={plantTree} />
+        {/* Bottom section - ambient CTAs, very soft */}
+        <div className="mt-auto pt-12 pb-8 flex flex-col items-center gap-8">
+          {/* Plant tree - stewardship-oriented */}
+          <PlantTreeCTA plantedTrees={plantedTrees} onPlantSimulated={plantTree} />
 
-        {/* Share card */}
-        <ShareCard
-          treeStage={treeStage}
-          plantedTrees={plantedTrees}
-          treeRings={treeRings}
-          conversationCount={conversationCount}
-          onShare={recordShare}
-        />
+          {/* Share - subtle */}
+          <ShareCard
+            treeStage={treeStage}
+            plantedTrees={plantedTrees}
+            treeRings={treeRings}
+            conversationCount={conversationCount}
+            onShare={recordShare}
+          />
 
-        {/* Community link */}
-        <CommunityLink />
+          {/* Community - very subtle */}
+          <CommunityLink />
+        </div>
       </div>
     </AppShell>
   );

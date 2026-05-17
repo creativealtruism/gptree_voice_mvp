@@ -9,23 +9,42 @@ interface VoiceStatusProps {
   error: string | null;
 }
 
+// Poetic, calm status messages
 function getStatusText(voiceState: VoiceState): string {
   switch (voiceState) {
     case "idle":
-      return "tap the acorn. ask anything.";
+      return "touch the acorn to speak";
     case "listening":
       return "listening...";
     case "transcribing":
-      return "hearing your words...";
+      return "hearing you...";
     case "thinking":
-      return "the grove is thinking...";
+      return "the grove stirs...";
     case "speaking":
-      return "the tree is answering...";
+      return "";
     case "error":
-      return "something went wrong.";
+      return "";
     default:
       return "";
   }
+}
+
+// Calm fallback messages for errors
+function getErrorMessage(error: string | null): string | null {
+  if (!error) return null;
+  
+  // Transform technical errors into poetic fallbacks
+  if (error.toLowerCase().includes("microphone") || error.toLowerCase().includes("permission")) {
+    return "voice feels shy right now. you can type below.";
+  }
+  if (error.toLowerCase().includes("network") || error.toLowerCase().includes("connection")) {
+    return "the forest is quiet. try again in a moment.";
+  }
+  if (error.toLowerCase().includes("not supported")) {
+    return "this grove prefers typing. speak through words below.";
+  }
+  
+  return "a gentle pause. try again.";
 }
 
 export function VoiceStatus({
@@ -35,32 +54,43 @@ export function VoiceStatus({
   error,
 }: VoiceStatusProps) {
   const statusText = getStatusText(voiceState);
+  const errorMessage = getErrorMessage(error);
 
   return (
-    <div className="flex flex-col items-center gap-4 text-center px-6 max-w-sm">
-      {/* Status text */}
-      <p
-        className={`
-          text-sm sm:text-base font-light tracking-wide
-          transition-all duration-500
-          ${voiceState === "idle" ? "text-muted-foreground" : "text-foreground"}
-        `}
-      >
-        {error || statusText}
-      </p>
+    <div className="flex flex-col items-center gap-5 text-center px-8 max-w-sm min-h-[100px]">
+      {/* Error message - calm, not alarming */}
+      {errorMessage && (
+        <p className="text-sm text-muted-foreground/70 font-light animate-fade-in">
+          {errorMessage}
+        </p>
+      )}
+      
+      {/* Status text - only when no error and not speaking */}
+      {!errorMessage && statusText && (
+        <p
+          className={`
+            text-sm sm:text-base font-light tracking-wide
+            transition-all duration-700
+            ${voiceState === "idle" ? "text-muted-foreground/60" : "text-foreground/80"}
+          `}
+        >
+          {statusText}
+        </p>
+      )}
 
-      {/* Transcript display */}
-      {transcript && voiceState !== "idle" && (
+      {/* Transcript display - subtle */}
+      {transcript && voiceState !== "idle" && !errorMessage && (
         <div className="animate-fade-in">
-          <p className="text-xs text-muted-foreground/70 mb-1">you said:</p>
-          <p className="text-foreground/90 text-sm italic">{`"${transcript}"`}</p>
+          <p className="text-foreground/60 text-sm font-light italic">
+            {`"${transcript}"`}
+          </p>
         </div>
       )}
 
-      {/* Response display */}
-      {response && (voiceState === "speaking" || voiceState === "idle") && (
-        <div className="animate-slide-up mt-2">
-          <p className="text-primary text-base sm:text-lg font-light leading-relaxed">
+      {/* Response display - the main focus */}
+      {response && (voiceState === "speaking" || voiceState === "idle") && !errorMessage && (
+        <div className="animate-slide-up">
+          <p className="text-primary/90 text-lg sm:text-xl font-light leading-relaxed tracking-wide">
             {response}
           </p>
         </div>

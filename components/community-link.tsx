@@ -16,12 +16,13 @@ export function CommunityLink() {
       rel="noopener noreferrer"
       onClick={handleClick}
       className="
-        text-xs text-muted-foreground/50
-        hover:text-primary/70
-        transition-colors
+        text-[10px] text-muted-foreground/25
+        hover:text-muted-foreground/50
+        transition-colors duration-500
+        tracking-wider
       "
     >
-      enter the grove &rarr;
+      join the grove
     </a>
   );
 }

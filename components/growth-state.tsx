@@ -8,13 +8,7 @@ interface GrowthStateProps {
   progressToNext: number;
 }
 
-const STAGE_LABELS: Record<TreeStage, string> = {
-  acorn: "acorn",
-  sprout: "sprout",
-  sapling: "sapling",
-  tree: "tree",
-};
-
+// Visual progress bar that feels organic, not dashboard-like
 export function GrowthState({
   treeStage,
   conversationCount,
@@ -22,35 +16,35 @@ export function GrowthState({
 }: GrowthStateProps) {
   const isMaxStage = treeStage === "tree";
 
-  return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      {/* Stage label */}
-      <div className="flex items-center gap-2">
-        <span className="text-xs text-muted-foreground/70">stage:</span>
-        <span className="text-sm text-foreground/90 font-medium">
-          {STAGE_LABELS[treeStage]}
-        </span>
-      </div>
+  // Only show after first conversation - keep initial state clean
+  if (conversationCount === 0) {
+    return null;
+  }
 
-      {/* Progress bar */}
+  return (
+    <div className="flex flex-col items-center gap-3 animate-fade-in">
+      {/* Organic progress visualization - not a bar, but subtle growth rings */}
       {!isMaxStage && (
-        <div className="w-32 h-1 bg-border/30 rounded-full overflow-hidden">
+        <div className="relative w-20 h-1">
+          {/* Background track - very subtle */}
+          <div className="absolute inset-0 rounded-full bg-border/20" />
+          {/* Progress - warm, alive */}
           <div
-            className="h-full bg-primary/60 rounded-full transition-all duration-500"
+            className="absolute inset-y-0 left-0 rounded-full bg-primary/40 transition-all duration-1000"
             style={{ width: `${progressToNext}%` }}
+          />
+          {/* Glow at the tip */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary/60 blur-sm transition-all duration-1000"
+            style={{ left: `calc(${progressToNext}% - 4px)` }}
           />
         </div>
       )}
 
-      {/* Conversation count */}
-      <p className="text-xs text-muted-foreground/50">
-        {conversationCount} {conversationCount === 1 ? "conversation" : "conversations"}
-      </p>
-
-      {/* Growth message after conversation */}
+      {/* Poetic growth message - only appears momentarily after conversations */}
       {conversationCount > 0 && (
-        <p className="text-xs text-primary/70 animate-fade-in">
-          your voice became growth.
+        <p className="text-xs text-primary/50 font-light tracking-wider">
+          your words became growth
         </p>
       )}
     </div>

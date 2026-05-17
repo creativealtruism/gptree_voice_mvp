@@ -42,39 +42,39 @@
   --radius: 1rem;
   
   /* ChatGPTree Forest Theme - Warm earth tones */
-  --background: oklch(0.15 0.02 90); /* Deep forest dark */
+  --background: oklch(0.12 0.015 100); /* Deeper forest night */
   --foreground: oklch(0.92 0.02 85); /* Warm cream */
   
-  --card: oklch(0.18 0.025 90); /* Slightly lighter forest */
+  --card: oklch(0.15 0.02 95); /* Slightly lighter forest */
   --card-foreground: oklch(0.92 0.02 85);
   
-  --popover: oklch(0.20 0.03 90);
+  --popover: oklch(0.17 0.025 95);
   --popover-foreground: oklch(0.92 0.02 85);
   
-  --primary: oklch(0.70 0.15 85); /* Amber glow */
-  --primary-foreground: oklch(0.15 0.02 90);
+  --primary: oklch(0.72 0.14 80); /* Softer amber glow */
+  --primary-foreground: oklch(0.12 0.015 100);
   
-  --secondary: oklch(0.25 0.04 140); /* Moss green dark */
+  --secondary: oklch(0.22 0.035 145); /* Moss green dark */
   --secondary-foreground: oklch(0.85 0.06 140);
   
-  --muted: oklch(0.22 0.02 90);
-  --muted-foreground: oklch(0.60 0.03 85);
+  --muted: oklch(0.18 0.015 95);
+  --muted-foreground: oklch(0.55 0.025 85);
   
-  --accent: oklch(0.55 0.12 140); /* Sage green */
+  --accent: oklch(0.52 0.10 145); /* Sage green */
   --accent-foreground: oklch(0.95 0.01 85);
   
-  --border: oklch(0.28 0.03 90);
-  --input: oklch(0.22 0.02 90);
-  --ring: oklch(0.70 0.15 85);
+  --border: oklch(0.22 0.02 95);
+  --input: oklch(0.18 0.015 95);
+  --ring: oklch(0.72 0.14 80);
   
   /* Custom forest colors */
-  --grove: oklch(0.45 0.10 145); /* Deep moss */
+  --grove: oklch(0.42 0.08 150); /* Deep moss */
   --grove-foreground: oklch(0.95 0.01 85);
-  --amber: oklch(0.75 0.16 75); /* Warm amber */
-  --amber-foreground: oklch(0.15 0.02 90);
-  --moss: oklch(0.50 0.12 140);
-  --sage: oklch(0.60 0.08 145);
-  --bark: oklch(0.35 0.05 55);
+  --amber: oklch(0.72 0.14 75); /* Warm amber */
+  --amber-foreground: oklch(0.12 0.015 100);
+  --moss: oklch(0.48 0.10 145);
+  --sage: oklch(0.58 0.07 150);
+  --bark: oklch(0.32 0.04 55);
 }
 
 @layer base {
@@ -87,60 +87,115 @@
 }
 
 @layer utilities {
-  /* Breathing animation for the acorn */
+  /* Organic breathing animation - slow, natural */
   .animate-breathe {
-    animation: breathe 4s ease-in-out infinite;
+    animation: breathe 6s ease-in-out infinite;
   }
   
-  /* Pulse animation for listening state */
+  /* Heartbeat pulse for listening state */
+  .animate-heartbeat {
+    animation: heartbeat 1.2s ease-in-out infinite;
+  }
+  
+  /* Listening pulse - organic expansion */
   .animate-listening {
-    animation: listening-pulse 1.5s ease-in-out infinite;
+    animation: listening-pulse 2s ease-in-out infinite;
   }
   
-  /* Thinking animation */
+  /* Thinking - gentle luminance shift */
   .animate-thinking {
-    animation: thinking 2s ease-in-out infinite;
+    animation: thinking 2.5s ease-in-out infinite;
   }
   
-  /* Speaking animation */
+  /* Speaking - radiant warmth */
   .animate-speaking {
-    animation: speaking 0.8s ease-in-out infinite;
+    animation: speaking-radiance 1s ease-in-out infinite;
+  }
+  
+  /* Soft wobble */
+  .animate-wobble {
+    animation: wobble 4s ease-in-out infinite;
   }
   
   /* Growth animation */
   .animate-grow {
-    animation: grow 1s ease-out forwards;
+    animation: grow 1.5s ease-out forwards;
   }
   
-  /* Glow effect */
-  .glow-amber {
-    box-shadow: 
-      0 0 20px oklch(0.75 0.16 75 / 0.4),
-      0 0 40px oklch(0.75 0.16 75 / 0.2),
-      0 0 60px oklch(0.75 0.16 75 / 0.1);
+  /* Ripple effect */
+  .animate-ripple {
+    animation: ripple 1.5s ease-out forwards;
   }
   
-  .glow-amber-intense {
+  /* Particle float */
+  .animate-particle {
+    animation: particle-float 8s ease-in-out infinite;
+  }
+  
+  /* Ambient drift */
+  .animate-drift {
+    animation: drift 12s ease-in-out infinite;
+  }
+  
+  /* Soft glow pulses */
+  .glow-ember {
     box-shadow: 
-      0 0 30px oklch(0.75 0.16 75 / 0.6),
-      0 0 60px oklch(0.75 0.16 75 / 0.4),
-      0 0 90px oklch(0.75 0.16 75 / 0.2);
+      0 0 30px oklch(0.72 0.14 75 / 0.3),
+      0 0 60px oklch(0.72 0.14 75 / 0.15),
+      0 0 100px oklch(0.72 0.14 75 / 0.08),
+      inset 0 0 20px oklch(0.72 0.14 75 / 0.1);
+  }
+  
+  .glow-ember-alive {
+    box-shadow: 
+      0 0 40px oklch(0.72 0.14 75 / 0.5),
+      0 0 80px oklch(0.72 0.14 75 / 0.25),
+      0 0 120px oklch(0.72 0.14 75 / 0.12),
+      inset 0 0 30px oklch(0.72 0.14 75 / 0.15);
+  }
+  
+  .glow-radiant {
+    box-shadow: 
+      0 0 50px oklch(0.75 0.16 75 / 0.6),
+      0 0 100px oklch(0.75 0.16 75 / 0.3),
+      0 0 150px oklch(0.75 0.16 75 / 0.15),
+      0 0 200px oklch(0.60 0.10 85 / 0.08),
+      inset 0 0 40px oklch(0.75 0.16 75 / 0.2);
   }
   
   .glow-moss {
     box-shadow: 
-      0 0 20px oklch(0.50 0.12 140 / 0.4),
-      0 0 40px oklch(0.50 0.12 140 / 0.2);
+      0 0 25px oklch(0.48 0.10 145 / 0.3),
+      0 0 50px oklch(0.48 0.10 145 / 0.15);
   }
   
   @keyframes breathe {
     0%, 100% {
       transform: scale(1);
-      opacity: 1;
+      filter: brightness(1);
     }
-    50% {
-      transform: scale(1.03);
-      opacity: 0.95;
+    40% {
+      transform: scale(1.02);
+      filter: brightness(1.05);
+    }
+    60% {
+      transform: scale(1.025);
+      filter: brightness(1.08);
+    }
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    15% {
+      transform: scale(1.04);
+    }
+    30% {
+      transform: scale(0.98);
+    }
+    45% {
+      transform: scale(1.02);
     }
   }
   
@@ -148,52 +203,113 @@
     0%, 100% {
       transform: scale(1);
       box-shadow: 
-        0 0 30px oklch(0.75 0.16 75 / 0.6),
-        0 0 60px oklch(0.75 0.16 75 / 0.3);
+        0 0 40px oklch(0.72 0.14 75 / 0.5),
+        0 0 80px oklch(0.72 0.14 75 / 0.25);
     }
     50% {
-      transform: scale(1.05);
+      transform: scale(1.04);
       box-shadow: 
-        0 0 50px oklch(0.75 0.16 75 / 0.8),
-        0 0 100px oklch(0.75 0.16 75 / 0.4);
+        0 0 60px oklch(0.75 0.16 75 / 0.7),
+        0 0 120px oklch(0.75 0.16 75 / 0.35),
+        0 0 180px oklch(0.75 0.16 75 / 0.15);
     }
   }
   
   @keyframes thinking {
     0%, 100% {
-      opacity: 0.7;
-      filter: brightness(1);
+      filter: brightness(1) saturate(1);
+      opacity: 0.9;
     }
     50% {
+      filter: brightness(1.15) saturate(1.1);
       opacity: 1;
-      filter: brightness(1.2);
     }
   }
   
-  @keyframes speaking {
+  @keyframes speaking-radiance {
     0%, 100% {
       transform: scale(1);
+      filter: brightness(1.1);
     }
     25% {
-      transform: scale(1.02);
-    }
-    50% {
-      transform: scale(0.98);
+      transform: scale(1.015);
+      filter: brightness(1.2);
     }
     75% {
-      transform: scale(1.01);
+      transform: scale(0.99);
+      filter: brightness(1.15);
+    }
+  }
+  
+  @keyframes wobble {
+    0%, 100% {
+      transform: rotate(0deg) translateY(0);
+    }
+    25% {
+      transform: rotate(0.5deg) translateY(-1px);
+    }
+    75% {
+      transform: rotate(-0.5deg) translateY(1px);
     }
   }
   
   @keyframes grow {
     0% {
       transform: scale(1);
+      filter: brightness(1);
     }
-    50% {
-      transform: scale(1.15);
+    30% {
+      transform: scale(1.12);
+      filter: brightness(1.3);
     }
     100% {
       transform: scale(1);
+      filter: brightness(1);
+    }
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes particle-float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.4;
+    }
+    25% {
+      transform: translateY(-15px) translateX(5px) scale(1.1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-25px) translateX(-3px) scale(0.9);
+      opacity: 0.3;
+    }
+    75% {
+      transform: translateY(-10px) translateX(-8px) scale(1.05);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes drift {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(10px, -5px) rotate(1deg);
+    }
+    50% {
+      transform: translate(-5px, 5px) rotate(-0.5deg);
+    }
+    75% {
+      transform: translate(-10px, -3px) rotate(0.5deg);
     }
   }
   
@@ -209,7 +325,7 @@
   @keyframes slide-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(15px);
     }
     to {
       opacity: 1;
@@ -222,31 +338,52 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+    }
+  }
+  
+  @keyframes haze-drift {
+    0%, 100% {
+      transform: translateX(0) scale(1);
+      opacity: 0.15;
+    }
+    50% {
+      transform: translateX(20px) scale(1.05);
+      opacity: 0.25;
     }
   }
   
   .animate-fade-in {
-    animation: fade-in 500ms ease-out;
+    animation: fade-in 600ms ease-out;
   }
   
   .animate-slide-up {
-    animation: slide-up 500ms ease-out;
+    animation: slide-up 600ms ease-out;
   }
   
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-haze {
+    animation: haze-drift 15s ease-in-out infinite;
   }
   
   @media (prefers-reduced-motion: reduce) {
     .animate-breathe,
+    .animate-heartbeat,
     .animate-listening,
     .animate-thinking,
     .animate-speaking,
+    .animate-wobble,
     .animate-grow,
+    .animate-ripple,
+    .animate-particle,
+    .animate-drift,
     .animate-fade-in,
     .animate-slide-up,
-    .animate-float {
+    .animate-float,
+    .animate-haze {
       animation: none;
     }
   }

@@ -15,49 +15,43 @@ export function PlantTreeCTA({ plantedTrees, onPlantSimulated }: PlantTreeCTAPro
     window.open(STRIPE_LINK, "_blank", "noopener,noreferrer");
   };
 
-  const handleSimulatePlant = () => {
-    // TODO: In production, this should be triggered by Stripe webhook
-    // after successful payment verification
-    onPlantSimulated();
-  };
-
   return (
-    <div className="flex flex-col items-center gap-3">
-      {/* Plant tree button */}
+    <div className="flex flex-col items-center gap-4">
+      {/* Ambient stewardship message */}
       <button
         onClick={handlePlantClick}
         className="
-          group relative px-6 py-3 rounded-full
-          bg-grove/20 border border-grove/30
-          text-grove-foreground
-          hover:bg-grove/30 hover:border-grove/50
-          focus:outline-none focus:ring-2 focus:ring-grove/30
-          transition-all duration-300
+          group relative
+          text-sm text-muted-foreground/50 font-light tracking-wide
+          hover:text-muted-foreground/70
+          focus:outline-none focus-visible:text-muted-foreground/70
+          transition-all duration-500
         "
       >
-        <span className="text-sm font-medium">plant 1 tree monthly</span>
-        <span className="block text-xs text-muted-foreground/70 mt-0.5">
-          $3.33/month
+        <span className="border-b border-transparent group-hover:border-muted-foreground/30 transition-all duration-300">
+          become a grove steward
+        </span>
+        <span className="block text-xs text-muted-foreground/30 mt-1 group-hover:text-muted-foreground/50 transition-colors">
+          plant a real tree each month
         </span>
       </button>
 
-      {/* Simulate success button (for MVP testing) */}
+      {/* Simulated plant (for MVP testing) - very subtle */}
       <button
-        onClick={handleSimulatePlant}
+        onClick={onPlantSimulated}
         className="
-          text-xs text-muted-foreground/50 
-          hover:text-muted-foreground/70
-          underline underline-offset-2
+          text-[10px] text-muted-foreground/20 
+          hover:text-muted-foreground/40
           transition-colors
         "
       >
-        I planted a tree
+        i planted
       </button>
 
-      {/* Planted count */}
+      {/* Planted trees - celebratory but not loud */}
       {plantedTrees > 0 && (
-        <p className="text-xs text-moss animate-fade-in">
-          {plantedTrees} {plantedTrees === 1 ? "tree" : "trees"} planted. a real tree was planted.
+        <p className="text-xs text-moss/60 font-light animate-fade-in">
+          {plantedTrees} {plantedTrees === 1 ? "tree" : "trees"} planted in the world
         </p>
       )}
     </div>

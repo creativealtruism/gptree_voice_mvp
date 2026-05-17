@@ -12,13 +12,6 @@ interface ShareCardProps {
   onShare: () => void;
 }
 
-const STAGE_EMOJI: Record<TreeStage, string> = {
-  acorn: "🌰",
-  sprout: "🌱",
-  sapling: "🌿",
-  tree: "🌳",
-};
-
 export function ShareCard({
   treeStage,
   plantedTrees,
@@ -29,7 +22,7 @@ export function ShareCard({
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const shareText = `my conversations are growing a forest. ${STAGE_EMOJI[treeStage]}
+  const shareText = `my conversations are growing a forest.
 
 ${conversationCount} conversations
 ${plantedTrees} real trees planted
@@ -70,47 +63,59 @@ chatgptree.ai`;
     }
   }, [shareText, onShare]);
 
+  // Only show after there's something to share
+  if (conversationCount === 0 && plantedTrees === 0) {
+    return null;
+  }
+
   if (!isOpen) {
     return (
       <button
         onClick={() => setIsOpen(true)}
         className="
-          text-xs text-muted-foreground/60
-          hover:text-muted-foreground/80
-          transition-colors
+          text-xs text-muted-foreground/40
+          hover:text-muted-foreground/60
+          transition-colors duration-300
         "
       >
-        share my tree
+        share your grove
       </button>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-fade-in">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-6 animate-fade-in"
+      onClick={() => setIsOpen(false)}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-md" />
+      
       <div
         className="
-          relative w-full max-w-sm p-6 rounded-2xl
-          bg-card border border-border/50
-          animate-slide-up
+          relative w-full max-w-xs p-8 rounded-3xl
+          bg-card/80 border border-border/30
+          animate-slide-up backdrop-blur-sm
         "
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Close button - subtle */}
         <button
           onClick={() => setIsOpen(false)}
           className="
             absolute top-4 right-4 p-2
-            text-muted-foreground/50 hover:text-muted-foreground
-            transition-colors
+            text-muted-foreground/30 hover:text-muted-foreground/60
+            transition-colors duration-300
           "
           aria-label="Close"
         >
           <svg
-            width="20"
-            height="20"
+            width="18"
+            height="18"
             viewBox="0 0 20 20"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="1.5"
             strokeLinecap="round"
           >
             <path d="M15 5L5 15M5 5l10 10" />
@@ -118,42 +123,48 @@ chatgptree.ai`;
         </button>
 
         {/* Card content */}
-        <div className="text-center space-y-4">
-          {/* Tree emoji */}
-          <div className="text-5xl">{STAGE_EMOJI[treeStage]}</div>
-
-          {/* Stats */}
-          <div className="space-y-1">
-            <p className="text-lg text-foreground font-light">
-              {conversationCount} conversations
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {plantedTrees} trees planted
-            </p>
-            <p className="text-sm text-muted-foreground">{treeRings} rings grown</p>
-          </div>
-
-          {/* Poetic line */}
-          <p className="text-primary text-sm italic pt-2">
-            my conversations are growing a forest.
+        <div className="text-center space-y-6">
+          {/* Poetic header */}
+          <p className="text-foreground/80 text-lg font-light leading-relaxed">
+            my conversations are
+            <br />
+            <span className="text-primary">growing a forest</span>
           </p>
 
-          {/* Share button */}
+          {/* Stats - subtle, not dashboard-like */}
+          <div className="flex justify-center gap-8 py-4">
+            <div className="text-center">
+              <p className="text-2xl text-foreground/90 font-light">{conversationCount}</p>
+              <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider">voices</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl text-foreground/90 font-light">{treeRings}</p>
+              <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider">rings</p>
+            </div>
+            {plantedTrees > 0 && (
+              <div className="text-center">
+                <p className="text-2xl text-moss/80 font-light">{plantedTrees}</p>
+                <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider">planted</p>
+              </div>
+            )}
+          </div>
+
+          {/* Share button - elegant */}
           <button
             onClick={handleShare}
             className="
               w-full py-3 rounded-full
-              bg-primary text-primary-foreground
-              hover:bg-primary/90
-              focus:outline-none focus:ring-2 focus:ring-primary/30
-              transition-colors font-medium
+              bg-primary/20 text-primary border border-primary/30
+              hover:bg-primary/30 hover:border-primary/50
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30
+              transition-all duration-300 font-light tracking-wide
             "
           >
-            {copied ? "copied!" : "share my tree"}
+            {copied ? "copied" : "share"}
           </button>
 
           {/* Tagline */}
-          <p className="text-xs text-muted-foreground/50">
+          <p className="text-[10px] text-muted-foreground/30 tracking-widest uppercase">
             talk. grow. plant. share.
           </p>
         </div>
