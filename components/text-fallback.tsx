@@ -4,12 +4,14 @@ import { useState, FormEvent } from "react";
 
 interface TextFallbackProps {
   isVoiceSupported: boolean;
+  permissionDenied?: boolean;
   onSubmit: (text: string) => void;
   disabled: boolean;
 }
 
 export function TextFallback({
   isVoiceSupported,
+  permissionDenied = false,
   onSubmit,
   disabled,
 }: TextFallbackProps) {
@@ -24,8 +26,9 @@ export function TextFallback({
     }
   };
 
-  // Only show prominently if voice is not supported, otherwise very subtle
-  const isMinimal = isVoiceSupported;
+  // Show prominently if voice is not supported OR permission was denied
+  const showProminent = !isVoiceSupported || permissionDenied;
+  const isMinimal = !showProminent;
 
   return (
     <form 
@@ -35,6 +38,16 @@ export function TextFallback({
         ${isMinimal && !isFocused ? "opacity-30 hover:opacity-60" : "opacity-100"}
       `}
     >
+      {/* Show gentle prompt when voice is unavailable */}
+      {showProminent && (
+        <p className="text-xs text-muted-foreground/60 text-center mb-3 animate-fade-in">
+          {permissionDenied 
+            ? "speak through words instead..." 
+            : "voice not available here, but words grow forests too..."
+          }
+        </p>
+      )}
+      
       <div className="relative">
         <input
           type="text"
@@ -42,7 +55,7 @@ export function TextFallback({
           onChange={(e) => setText(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder={isMinimal ? "or whisper here..." : "speak through words..."}
+          placeholder={showProminent ? "share your thoughts..." : "or whisper here..."}
           disabled={disabled}
           className={`
             w-full bg-transparent border-b
@@ -51,7 +64,7 @@ export function TextFallback({
             focus:outline-none focus:placeholder:text-muted-foreground/50
             disabled:opacity-40 disabled:cursor-not-allowed
             transition-all duration-300
-            ${isFocused ? "border-primary/40" : "border-border/20"}
+            ${isFocused || showProminent ? "border-primary/40" : "border-border/20"}
           `}
         />
         {/* Subtle send indicator */}

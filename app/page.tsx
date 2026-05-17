@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import Image from "next/image";
 import { AppShell } from "@/components/app-shell";
 import { VoiceAcornButton } from "@/components/voice-acorn-button";
 import { VoiceStatus } from "@/components/voice-status";
@@ -32,6 +31,7 @@ export default function ChatGPTreeVoice() {
     response,
     error,
     isVoiceSupported,
+    permissionDenied,
     startListening,
     submitText,
     clearError,
@@ -65,13 +65,13 @@ export default function ChatGPTreeVoice() {
       <AppShell>
         <div className="flex items-center justify-center">
           <div className="relative w-20 h-20 animate-breathe">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png"
               alt="Loading"
               width={80}
               height={80}
               className="rounded-2xl opacity-60"
-              priority
             />
           </div>
         </div>
@@ -115,6 +115,7 @@ export default function ChatGPTreeVoice() {
         <div className="my-4">
           <TextFallback
             isVoiceSupported={isVoiceSupported}
+            permissionDenied={permissionDenied}
             onSubmit={handleTextSubmit}
             disabled={voiceState !== "idle"}
           />

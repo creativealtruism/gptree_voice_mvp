@@ -361,6 +361,7 @@ export function VoiceAcornButton({
   onPress,
 }: VoiceAcornButtonProps) {
   const isActive = voiceState !== "idle" && voiceState !== "error";
+  const isListening = voiceState === "listening";
   const [ripples, setRipples] = useState<number[]>([]);
 
   const handlePress = useCallback(() => {
@@ -376,6 +377,24 @@ export function VoiceAcornButton({
 
   return (
     <div className="relative">
+      {/* Listening state: expanding pulse rings */}
+      {isListening && (
+        <>
+          <div
+            className="absolute inset-[-10%] rounded-full border border-primary/30 animate-listening-ring pointer-events-none"
+            style={{ animationDelay: "0ms" }}
+          />
+          <div
+            className="absolute inset-[-10%] rounded-full border border-primary/20 animate-listening-ring pointer-events-none"
+            style={{ animationDelay: "600ms" }}
+          />
+          <div
+            className="absolute inset-[-10%] rounded-full border border-primary/10 animate-listening-ring pointer-events-none"
+            style={{ animationDelay: "1200ms" }}
+          />
+        </>
+      )}
+      
       {/* Interaction ripples */}
       {ripples.map((id) => (
         <div

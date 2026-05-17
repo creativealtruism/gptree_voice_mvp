@@ -101,9 +101,11 @@ export function useVoiceInteraction() {
   const [response, setResponse] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [isVoiceSupported, setIsVoiceSupported] = useState(true);
+  const [permissionDenied, setPermissionDenied] = useState(false);
   
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const isProcessingRef = useRef(false);
 
   // Initialize speech APIs
   useEffect(() => {
@@ -188,12 +190,25 @@ export function useVoiceInteraction() {
 
     recognition.onstart = () => {
       setVoiceState("listening");
+      isProcessingRef.current = false;
       trackEvent("voice_listening_started");
     };
 
     recognition.onresult = async (event: SpeechRecognitionEvent) => {
+      // Guard against duplicate processing
+      if (isProcessingRef.current) return;
+      isProcessingRef.current = true;
+      
       const result = event.results[0][0];
       const userTranscript = result.transcript;
+      
+      // Ignore empty or very short transcripts (likely noise)
+      if (!userTranscript || userTranscript.trim().length < 2) {
+        isProcessingRef.current = false;
+        setVoiceState("idle");
+        return;
+      }
+      
       setTranscript(userTranscript);
       setVoiceState("transcribing");
 
@@ -203,21 +218,37 @@ export function useVoiceInteraction() {
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error("Speech recognition error:", event.error);
+      isProcessingRef.current = false;
+      
+      // Handle specific error types gracefully
       if (event.error === "not-allowed") {
-        setError("Microphone access denied. Please allow microphone access.");
+        setPermissionDenied(true);
+        setError("voice feels shy right now. try typing instead.");
+        setVoiceState("error");
       } else if (event.error === "no-speech") {
-        setError("No speech detected. Try again.");
+        // Silent pause - just reset quietly, no error shown
         setVoiceState("idle");
         return;
+      } else if (event.error === "aborted") {
+        // User or system aborted - reset quietly
+        setVoiceState("idle");
+        return;
+      } else if (event.error === "network") {
+        setError("the grove needs a connection. try again.");
+        setVoiceState("error");
+      } else if (event.error === "audio-capture") {
+        setError("couldn't hear you. check your microphone.");
+        setVoiceState("error");
       } else {
-        setError(`Voice error: ${event.error}`);
+        // Unknown error - show gently
+        setError("something rustled unexpectedly. try again.");
+        setVoiceState("error");
       }
-      setVoiceState("error");
     };
 
     recognition.onend = () => {
-      // Only set to idle if not processing
-      if (voiceState === "listening") {
+      // Only reset to idle if not actively processing a result
+      if (!isProcessingRef.current && voiceState === "listening") {
         setVoiceState("idle");
       }
     };
@@ -265,6 +296,7 @@ export function useVoiceInteraction() {
     response,
     error,
     isVoiceSupported,
+    permissionDenied,
     startListening,
     stopListening,
     submitText,
