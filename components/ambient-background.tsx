@@ -8,25 +8,22 @@ function generateParticles(count: number) {
   for (let i = 0; i < count; i++) {
     particles.push({
       id: i,
-      left: `${(i * 17) % 100}%`,
-      top: `${(i * 23 + 40) % 60 + 30}%`,
-      size: 2 + (i % 3),
-      delay: (i * 0.8) % 8,
-      duration: 6 + (i % 4) * 2,
+      left: `${(i * 17 + 5) % 95}%`,
+      top: `${(i * 23 + 35) % 55 + 35}%`,
+      size: 2 + (i % 4),
+      delay: (i * 0.9) % 10,
+      duration: 8 + (i % 5) * 2,
+      hue: 75 + (i % 4) * 20, // warm amber to soft green range
     });
   }
   return particles;
 }
 
-const PARTICLES = generateParticles(12);
+const PARTICLES = generateParticles(16);
 
-// 4-leaf motif SVG path (simplified version of the ChatGPTree logo)
+// 4-leaf motif SVG (ChatGPTree logo shape)
 const LeafMotif = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 100 100"
-    className={className}
-    fill="currentColor"
-  >
+  <svg viewBox="0 0 100 100" className={className} fill="currentColor">
     {/* Top left leaf */}
     <path d="M20 45 C20 25, 35 10, 45 10 L45 45 Z" />
     {/* Top right leaf */}
@@ -47,99 +44,114 @@ export function AmbientBackground() {
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Deep base layer */}
+      {/* Rich forest gradient base - warm greens, not black */}
       <div
         className="absolute inset-0"
         style={{
           background: `
-            linear-gradient(180deg, 
-              oklch(0.08 0.01 100) 0%, 
-              oklch(0.11 0.015 105) 30%,
-              oklch(0.13 0.02 110) 60%, 
-              oklch(0.15 0.025 115) 100%)
+            linear-gradient(175deg, 
+              oklch(0.12 0.03 148) 0%, 
+              oklch(0.15 0.035 145) 25%,
+              oklch(0.17 0.04 143) 50%, 
+              oklch(0.19 0.045 140) 75%,
+              oklch(0.16 0.035 145) 100%)
           `,
         }}
       />
 
-      {/* Forest floor glow - ground mist */}
+      {/* Atmospheric fog layers - Ghibli-inspired softness */}
       <div
-        className="absolute bottom-0 inset-x-0 h-[60%] animate-haze"
+        className="absolute inset-0 animate-haze"
         style={{
           background: `
-            radial-gradient(ellipse 120% 50% at 50% 100%, 
-              oklch(0.20 0.04 145 / 0.25) 0%, 
-              oklch(0.16 0.03 140 / 0.15) 40%,
-              transparent 70%)
+            radial-gradient(ellipse 100% 60% at 30% 80%, 
+              oklch(0.24 0.05 145 / 0.35) 0%, 
+              transparent 60%),
+            radial-gradient(ellipse 80% 50% at 70% 70%, 
+              oklch(0.22 0.04 150 / 0.28) 0%, 
+              transparent 55%)
           `,
         }}
       />
 
-      {/* Ambient haze layers */}
+      {/* Secondary atmospheric layer with drift */}
       <div
         className="absolute inset-0 animate-drift"
         style={{
           background: `
-            radial-gradient(ellipse 60% 40% at 20% 70%, 
-              oklch(0.18 0.03 150 / 0.2) 0%, 
-              transparent 60%),
-            radial-gradient(ellipse 50% 35% at 80% 60%, 
-              oklch(0.16 0.025 90 / 0.15) 0%, 
+            radial-gradient(ellipse 70% 45% at 20% 65%, 
+              oklch(0.20 0.035 148 / 0.22) 0%, 
+              transparent 55%),
+            radial-gradient(ellipse 60% 40% at 85% 55%, 
+              oklch(0.18 0.03 95 / 0.15) 0%, 
               transparent 50%)
           `,
         }}
       />
 
-      {/* Subtle 4-leaf motif watermark - woven into the grove */}
+      {/* Subtle 4-leaf motif watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <LeafMotif 
-          className="w-[600px] h-[600px] text-foreground/[0.012] animate-breathe"
-        />
+        <LeafMotif className="w-[700px] h-[700px] text-foreground/[0.008] animate-breathe" />
       </div>
 
-      {/* Central warm glow - where the acorn lives */}
+      {/* Central warm glow - the grove's heart */}
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] animate-breathe"
+        className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] animate-breathe"
         style={{
           background: `
             radial-gradient(circle at center, 
-              oklch(0.25 0.06 80 / 0.12) 0%, 
-              oklch(0.20 0.04 85 / 0.08) 30%,
-              oklch(0.15 0.02 90 / 0.04) 60%,
-              transparent 80%)
+              oklch(0.30 0.06 85 / 0.14) 0%, 
+              oklch(0.25 0.05 90 / 0.10) 25%,
+              oklch(0.20 0.04 95 / 0.06) 50%,
+              transparent 75%)
           `,
         }}
       />
 
-      {/* Subtle root system hint at bottom */}
+      {/* Subtle root textures at bottom */}
       <div
-        className="absolute bottom-0 inset-x-0 h-32 opacity-30"
+        className="absolute bottom-0 inset-x-0 h-40 opacity-40"
         style={{
           background: `
-            radial-gradient(ellipse 30% 100% at 35% 100%, 
-              oklch(0.25 0.04 55 / 0.4) 0%, 
-              transparent 70%),
-            radial-gradient(ellipse 25% 100% at 65% 100%, 
-              oklch(0.22 0.03 50 / 0.3) 0%, 
+            radial-gradient(ellipse 35% 120% at 30% 100%, 
+              oklch(0.28 0.04 55 / 0.45) 0%, 
+              transparent 65%),
+            radial-gradient(ellipse 30% 120% at 70% 100%, 
+              oklch(0.26 0.035 52 / 0.38) 0%, 
               transparent 60%),
-            radial-gradient(ellipse 20% 100% at 50% 100%, 
-              oklch(0.28 0.05 60 / 0.35) 0%, 
-              transparent 80%)
+            radial-gradient(ellipse 25% 120% at 50% 100%, 
+              oklch(0.30 0.05 58 / 0.42) 0%, 
+              transparent 75%)
           `,
         }}
       />
 
-      {/* Top darkness gradient - canopy shadow */}
+      {/* Forest floor mist - warm and organic */}
       <div
-        className="absolute top-0 inset-x-0 h-40"
+        className="absolute bottom-0 inset-x-0 h-[50%] animate-haze"
+        style={{
+          animationDelay: "-5s",
+          background: `
+            radial-gradient(ellipse 130% 50% at 50% 100%, 
+              oklch(0.22 0.045 145 / 0.3) 0%, 
+              oklch(0.18 0.035 148 / 0.18) 35%,
+              transparent 65%)
+          `,
+        }}
+      />
+
+      {/* Top canopy shadow - soft, not harsh */}
+      <div
+        className="absolute top-0 inset-x-0 h-48"
         style={{
           background: `linear-gradient(180deg, 
-            oklch(0.06 0.01 100 / 0.9) 0%, 
-            oklch(0.08 0.01 100 / 0.5) 40%,
+            oklch(0.10 0.02 148 / 0.7) 0%, 
+            oklch(0.12 0.025 145 / 0.4) 40%,
             transparent 100%)`,
         }}
       />
 
-      {/* Floating particles */}
+      {/* Floating light particles */}
       {mounted && (
         <div className="absolute inset-0 pointer-events-none">
           {PARTICLES.map((particle) => (
@@ -151,23 +163,24 @@ export function AmbientBackground() {
                 top: particle.top,
                 width: particle.size,
                 height: particle.size,
-                backgroundColor: `oklch(0.65 0.10 ${75 + (particle.id % 3) * 25} / 0.4)`,
+                backgroundColor: `oklch(0.68 0.10 ${particle.hue} / 0.45)`,
                 animationDelay: `${particle.delay}s`,
                 animationDuration: `${particle.duration}s`,
+                boxShadow: `0 0 ${particle.size * 3}px oklch(0.68 0.10 ${particle.hue} / 0.25)`,
               }}
             />
           ))}
         </div>
       )}
 
-      {/* Vignette for cinematic depth */}
+      {/* Cinematic vignette - softer */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 70% 60% at 50% 50%, 
-              transparent 30%, 
-              oklch(0.05 0.01 100 / 0.4) 100%)
+            radial-gradient(ellipse 75% 65% at 50% 50%, 
+              transparent 35%, 
+              oklch(0.08 0.02 148 / 0.35) 100%)
           `,
         }}
       />
