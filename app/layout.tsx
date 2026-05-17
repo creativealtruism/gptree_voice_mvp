@@ -22,7 +22,15 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Talking to Trees | by ChatGPTree",
   description: "A living voice companion. Speak into the grove.",
-  keywords: ["AI", "voice", "tree planting", "climate", "forest", "meditation", "companion"],
+  keywords: [
+    "AI",
+    "voice",
+    "tree planting",
+    "climate",
+    "forest",
+    "meditation",
+    "companion",
+  ],
   openGraph: {
     title: "Talking to Trees",
     description: "A living voice companion. Every conversation can grow a forest.",

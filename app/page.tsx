@@ -13,6 +13,7 @@ import { useTreeGrowth } from "@/lib/use-tree-growth";
 import { useVoiceInteraction } from "@/lib/use-voice-interaction";
 
 export default function ChatGPTreeVoice() {
+  // Voice-first MVP for Talking to Trees
   const {
     treeStage,
     treeRings,
