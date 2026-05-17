@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@source "../node_modules/streamdown/dist/*.js";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,23 +8,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
-  --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -42,75 +27,54 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Forest theme custom colors */
+  --color-grove: var(--grove);
+  --color-grove-foreground: var(--grove-foreground);
+  --color-amber: var(--amber);
+  --color-amber-foreground: var(--amber-foreground);
+  --color-moss: var(--moss);
+  --color-sage: var(--sage);
+  --color-bark: var(--bark);
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.12 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0 0);
-  --primary: oklch(0.15 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.94 0 0);
-  --accent-foreground: oklch(0.15 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.89 0 0);
-  --input: oklch(0.94 0 0);
-  --ring: oklch(0.15 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.12 0 0);
-  --sidebar-primary: oklch(0.15 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.89 0 0);
-  --sidebar-ring: oklch(0.15 0 0);
-}
-
-.dark {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.88 0 0);
-  --primary-foreground: oklch(0.08 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.18 0 0);
-  --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.95 0 0 / 12%);
-  --input: oklch(0.95 0 0 / 8%);
-  --ring: oklch(0.88 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.88 0 0);
-  --sidebar-primary-foreground: oklch(0.08 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.95 0 0 / 12%);
-  --sidebar-ring: oklch(0.88 0 0);
+  --radius: 1rem;
+  
+  /* ChatGPTree Forest Theme - Warm earth tones */
+  --background: oklch(0.15 0.02 90); /* Deep forest dark */
+  --foreground: oklch(0.92 0.02 85); /* Warm cream */
+  
+  --card: oklch(0.18 0.025 90); /* Slightly lighter forest */
+  --card-foreground: oklch(0.92 0.02 85);
+  
+  --popover: oklch(0.20 0.03 90);
+  --popover-foreground: oklch(0.92 0.02 85);
+  
+  --primary: oklch(0.70 0.15 85); /* Amber glow */
+  --primary-foreground: oklch(0.15 0.02 90);
+  
+  --secondary: oklch(0.25 0.04 140); /* Moss green dark */
+  --secondary-foreground: oklch(0.85 0.06 140);
+  
+  --muted: oklch(0.22 0.02 90);
+  --muted-foreground: oklch(0.60 0.03 85);
+  
+  --accent: oklch(0.55 0.12 140); /* Sage green */
+  --accent-foreground: oklch(0.95 0.01 85);
+  
+  --border: oklch(0.28 0.03 90);
+  --input: oklch(0.22 0.02 90);
+  --ring: oklch(0.70 0.15 85);
+  
+  /* Custom forest colors */
+  --grove: oklch(0.45 0.10 145); /* Deep moss */
+  --grove-foreground: oklch(0.95 0.01 85);
+  --amber: oklch(0.75 0.16 75); /* Warm amber */
+  --amber-foreground: oklch(0.15 0.02 90);
+  --moss: oklch(0.50 0.12 140);
+  --sage: oklch(0.60 0.08 145);
+  --bark: oklch(0.35 0.05 55);
 }
 
 @layer base {
@@ -120,74 +84,117 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  /* Hide scrollbar while keeping functionality */
-  .hide-scrollbar {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
 }
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fade-in 200ms ease-out;
+  /* Breathing animation for the acorn */
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
   }
   
-  .animate-slide-up {
-    animation: slide-up 200ms ease-out;
+  /* Pulse animation for listening state */
+  .animate-listening {
+    animation: listening-pulse 1.5s ease-in-out infinite;
   }
   
-  .animate-slide-down {
-    animation: slide-down 150ms ease-out;
+  /* Thinking animation */
+  .animate-thinking {
+    animation: thinking 2s ease-in-out infinite;
   }
   
-  .animate-scale-in {
-    animation: scale-in 200ms ease-out;
+  /* Speaking animation */
+  .animate-speaking {
+    animation: speaking 0.8s ease-in-out infinite;
   }
   
-  .animate-message-in {
-    animation: message-in 300ms ease-out;
+  /* Growth animation */
+  .animate-grow {
+    animation: grow 1s ease-out forwards;
   }
-
-  .shadow-border-small {
+  
+  /* Glow effect */
+  .glow-amber {
     box-shadow: 
-      0 0 0 1px rgba(0, 0, 0, 0.08),
-      0 1px 2px rgba(0, 0, 0, 0.12);
+      0 0 20px oklch(0.75 0.16 75 / 0.4),
+      0 0 40px oklch(0.75 0.16 75 / 0.2),
+      0 0 60px oklch(0.75 0.16 75 / 0.1);
   }
   
-  .shadow-border-medium {
+  .glow-amber-intense {
     box-shadow: 
-      0 0 0 1px rgba(0, 0, 0, 0.08),
-      0 2px 4px rgba(0, 0, 0, 0.12),
-      0 1px 6px rgba(0, 0, 0, 0.05);
+      0 0 30px oklch(0.75 0.16 75 / 0.6),
+      0 0 60px oklch(0.75 0.16 75 / 0.4),
+      0 0 90px oklch(0.75 0.16 75 / 0.2);
   }
   
-  .dark .shadow-border-small {
+  .glow-moss {
     box-shadow: 
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 1px 2px rgba(0, 0, 0, 0.4);
+      0 0 20px oklch(0.50 0.12 140 / 0.4),
+      0 0 40px oklch(0.50 0.12 140 / 0.2);
   }
   
-  .dark .shadow-border-medium {
-    box-shadow: 
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 2px 4px rgba(0, 0, 0, 0.4),
-      0 1px 6px rgba(0, 0, 0, 0.2);
-  }
-
-  .glass-effect {
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.03);
+      opacity: 0.95;
+    }
   }
   
-  .dark .glass-effect {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  @keyframes listening-pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 
+        0 0 30px oklch(0.75 0.16 75 / 0.6),
+        0 0 60px oklch(0.75 0.16 75 / 0.3);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 
+        0 0 50px oklch(0.75 0.16 75 / 0.8),
+        0 0 100px oklch(0.75 0.16 75 / 0.4);
+    }
+  }
+  
+  @keyframes thinking {
+    0%, 100% {
+      opacity: 0.7;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 1;
+      filter: brightness(1.2);
+    }
+  }
+  
+  @keyframes speaking {
+    0%, 100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.02);
+    }
+    50% {
+      transform: scale(0.98);
+    }
+    75% {
+      transform: scale(1.01);
+    }
+  }
+  
+  @keyframes grow {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
   
   @keyframes fade-in {
@@ -210,48 +217,37 @@
     }
   }
   
-  @keyframes slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
+  @keyframes float {
+    0%, 100% {
       transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
     }
   }
   
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  .animate-fade-in {
+    animation: fade-in 500ms ease-out;
   }
   
-  @keyframes message-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-      filter: blur(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+  .animate-slide-up {
+    animation: slide-up 500ms ease-out;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
   
   @media (prefers-reduced-motion: reduce) {
+    .animate-breathe,
+    .animate-listening,
+    .animate-thinking,
+    .animate-speaking,
+    .animate-grow,
     .animate-fade-in,
     .animate-slide-up,
-    .animate-slide-down,
-    .animate-scale-in,
-    .animate-message-in {
-      animation: fade-in 200ms ease-out;
+    .animate-float {
+      animation: none;
     }
   }
 }

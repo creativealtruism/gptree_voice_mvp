@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,8 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Gateway Demo",
-  description: "A demo of the Vercel AI Gateway with the AI SDK by Vercel",
+  title: "ChatGPTree Voice",
+  description: "A voice-first AI companion. Talk. Grow. Plant. Share.",
+  keywords: ["AI", "voice", "tree planting", "climate", "forest"],
+  openGraph: {
+    title: "ChatGPTree Voice",
+    description: "A voice-first AI companion where your conversations grow real forests.",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#1a1a12",
 };
 
 export default function RootLayout({
@@ -24,18 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="bg-background">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
