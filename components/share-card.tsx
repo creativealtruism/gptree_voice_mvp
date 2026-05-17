@@ -2,11 +2,9 @@
 
 import { useState, useCallback } from "react";
 import Image from "next/image";
-import { type TreeStage } from "@/lib/use-tree-growth";
 import { trackEvent } from "@/lib/analytics";
 
 interface ShareCardProps {
-  treeStage: TreeStage;
   plantedTrees: number;
   treeRings: number;
   conversationCount: number;
@@ -14,7 +12,6 @@ interface ShareCardProps {
 }
 
 export function ShareCard({
-  treeStage,
   plantedTrees,
   treeRings,
   conversationCount,

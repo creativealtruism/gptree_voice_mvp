@@ -3,6 +3,59 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { trackEvent } from "./analytics";
 
+// Web Speech API type declarations
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+  message?: string;
+}
+
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+  resultIndex: number;
+}
+
+interface SpeechRecognitionResultList {
+  length: number;
+  item(index: number): SpeechRecognitionResult;
+  [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+  length: number;
+  item(index: number): SpeechRecognitionAlternative;
+  [index: number]: SpeechRecognitionAlternative;
+  isFinal: boolean;
+}
+
+interface SpeechRecognitionAlternative {
+  transcript: string;
+  confidence: number;
+}
+
+interface SpeechRecognitionInstance extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onstart: ((this: SpeechRecognitionInstance, ev: Event) => void) | null;
+  onend: ((this: SpeechRecognitionInstance, ev: Event) => void) | null;
+  onerror: ((this: SpeechRecognitionInstance, ev: SpeechRecognitionErrorEvent) => void) | null;
+  onresult: ((this: SpeechRecognitionInstance, ev: SpeechRecognitionEvent) => void) | null;
+  start(): void;
+  stop(): void;
+  abort(): void;
+}
+
+interface SpeechRecognitionConstructor {
+  new (): SpeechRecognitionInstance;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition?: SpeechRecognitionConstructor;
+    webkitSpeechRecognition?: SpeechRecognitionConstructor;
+  }
+}
+
 export type VoiceState =
   | "idle"
   | "listening"
@@ -10,11 +63,6 @@ export type VoiceState =
   | "thinking"
   | "speaking"
   | "error";
-
-interface SpeechRecognitionResult {
-  transcript: string;
-  confidence: number;
-}
 
 // Graceful placeholder responses when no AI API is configured
 const PLACEHOLDER_RESPONSES = [
@@ -35,10 +83,9 @@ function getPlaceholderResponse(): string {
 }
 
 // Check if speech recognition is available
-function getSpeechRecognition(): typeof SpeechRecognition | null {
+function getSpeechRecognition(): SpeechRecognitionConstructor | null {
   if (typeof window === "undefined") return null;
   
-  // @ts-expect-error - webkit prefix for Safari
   return window.SpeechRecognition || window.webkitSpeechRecognition || null;
 }
 
@@ -55,7 +102,7 @@ export function useVoiceInteraction() {
   const [error, setError] = useState<string | null>(null);
   const [isVoiceSupported, setIsVoiceSupported] = useState(true);
   
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
   // Initialize speech APIs
@@ -145,7 +192,7 @@ export function useVoiceInteraction() {
     };
 
     recognition.onresult = async (event: SpeechRecognitionEvent) => {
-      const result = event.results[0][0] as SpeechRecognitionResult;
+      const result = event.results[0][0];
       const userTranscript = result.transcript;
       setTranscript(userTranscript);
       setVoiceState("transcribing");

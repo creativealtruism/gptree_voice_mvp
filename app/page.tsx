@@ -127,7 +127,6 @@ export default function ChatGPTreeVoice() {
 
           {/* Share - subtle */}
           <ShareCard
-            treeStage={treeStage}
             plantedTrees={plantedTrees}
             treeRings={treeRings}
             conversationCount={conversationCount}
