@@ -111,15 +111,18 @@ export function useVoiceInteraction() {
   useEffect(() => {
     const SpeechRecognitionClass = getSpeechRecognition();
     if (SpeechRecognitionClass) {
+      console.log("[v0] voice_supported: true");
       recognitionRef.current = new SpeechRecognitionClass();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
       recognitionRef.current.lang = "en-US";
     } else {
+      console.log("[v0] voice_supported: false");
       setIsVoiceSupported(false);
     }
 
     synthRef.current = getSpeechSynthesis();
+    console.log("[v0] speech_synthesis_supported:", !!synthRef.current);
 
     return () => {
       if (recognitionRef.current) {
@@ -132,7 +135,11 @@ export function useVoiceInteraction() {
   }, []);
 
   const speak = useCallback((text: string) => {
-    if (!synthRef.current) return;
+    if (!synthRef.current) {
+      console.log("[v0] speech_synthesis_unavailable");
+      setVoiceState("idle");
+      return;
+    }
 
     // Cancel any ongoing speech
     synthRef.current.cancel();
@@ -142,11 +149,17 @@ export function useVoiceInteraction() {
     utterance.pitch = 1;
     utterance.volume = 0.8;
 
+    utterance.onstart = () => {
+      console.log("[v0] speech_started");
+    };
+
     utterance.onend = () => {
+      console.log("[v0] speech_finished");
       setVoiceState("idle");
     };
 
-    utterance.onerror = () => {
+    utterance.onerror = (e) => {
+      console.error("[v0] speech_error:", e.error);
       setVoiceState("idle");
     };
 
@@ -158,18 +171,40 @@ export function useVoiceInteraction() {
     async (userInput: string): Promise<string> => {
       setVoiceState("thinking");
       trackEvent("voice_transcript_completed", { transcript: userInput });
+      console.log("[v0] transcript_received:", userInput);
 
-      // Simulate thinking time
-      await new Promise((resolve) => setTimeout(resolve, 1500 + Math.random() * 1000));
+      try {
+        console.log("[v0] api_request_started");
+        
+        const res = await fetch("/api/voice", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userInput }),
+        });
 
-      // TODO: Add real AI integration here
-      // For now, use placeholder responses
-      const aiResponse = getPlaceholderResponse();
+        const data = await res.json();
+        
+        if (data.fallback) {
+          console.log("[v0] api_response_fallback_used");
+        } else {
+          console.log("[v0] api_response_received:", data.reply?.substring(0, 50));
+        }
 
-      trackEvent("ai_response_completed");
-      setResponse(aiResponse);
+        const aiResponse = data.reply || getPlaceholderResponse();
+        trackEvent("ai_response_completed", { fallback: !!data.fallback });
+        setResponse(aiResponse);
 
-      return aiResponse;
+        return aiResponse;
+      } catch (error) {
+        console.error("[v0] api_request_failed:", error);
+        
+        // Graceful fallback - never crash the experience
+        const fallbackResponse = getPlaceholderResponse();
+        setResponse(fallbackResponse);
+        trackEvent("ai_response_fallback");
+        
+        return fallbackResponse;
+      }
     },
     []
   );
@@ -184,6 +219,7 @@ export function useVoiceInteraction() {
     setError(null);
     setTranscript("");
     setResponse("");
+    console.log("[v0] voice_button_tapped, mic_permission_requested");
     trackEvent("voice_button_tapped");
 
     const recognition = recognitionRef.current;
@@ -191,6 +227,7 @@ export function useVoiceInteraction() {
     recognition.onstart = () => {
       setVoiceState("listening");
       isProcessingRef.current = false;
+      console.log("[v0] mic_permission_granted, listening_started");
       trackEvent("voice_listening_started");
     };
 
@@ -217,7 +254,7 @@ export function useVoiceInteraction() {
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      console.error("Speech recognition error:", event.error);
+      console.error("[v0] voice_error:", event.error);
       isProcessingRef.current = false;
       
       // Handle specific error types gracefully

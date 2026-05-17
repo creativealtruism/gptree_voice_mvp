@@ -7,6 +7,7 @@ export type AnalyticsEvent =
   | "voice_listening_started"
   | "voice_transcript_completed"
   | "ai_response_completed"
+  | "ai_response_fallback"
   | "growth_stage_changed"
   | "plant_tree_clicked"
   | "tree_planted_simulated"
