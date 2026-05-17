@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@source "../node_modules/streamdown/dist/*.js";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,23 +8,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --font-serif: var(--font-playfair);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
-  --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -42,75 +28,56 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Forest theme custom colors */
+  --color-grove: var(--grove);
+  --color-grove-foreground: var(--grove-foreground);
+  --color-amber: var(--amber);
+  --color-amber-foreground: var(--amber-foreground);
+  --color-moss: var(--moss);
+  --color-sage: var(--sage);
+  --color-bark: var(--bark);
+  --color-cream: var(--cream);
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.12 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0 0);
-  --primary: oklch(0.15 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.94 0 0);
-  --accent-foreground: oklch(0.15 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.89 0 0);
-  --input: oklch(0.94 0 0);
-  --ring: oklch(0.15 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.12 0 0);
-  --sidebar-primary: oklch(0.15 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.89 0 0);
-  --sidebar-ring: oklch(0.15 0 0);
-}
-
-.dark {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.88 0 0);
-  --primary-foreground: oklch(0.08 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.18 0 0);
-  --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.95 0 0 / 12%);
-  --input: oklch(0.95 0 0 / 8%);
-  --ring: oklch(0.88 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.88 0 0);
-  --sidebar-primary-foreground: oklch(0.08 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.95 0 0 / 12%);
-  --sidebar-ring: oklch(0.88 0 0);
+  --radius: 1rem;
+  
+  /* ChatGPTree Forest Theme - Warm, organic, Ghibli-inspired */
+  --background: oklch(0.16 0.025 145); /* Deep forest green, not black */
+  --foreground: oklch(0.94 0.015 85); /* Warm cream */
+  
+  --card: oklch(0.19 0.03 145); /* Slightly lighter forest */
+  --card-foreground: oklch(0.94 0.015 85);
+  
+  --popover: oklch(0.21 0.035 145);
+  --popover-foreground: oklch(0.94 0.015 85);
+  
+  --primary: oklch(0.74 0.12 85); /* Warm golden amber */
+  --primary-foreground: oklch(0.14 0.025 145);
+  
+  --secondary: oklch(0.28 0.05 145); /* Moss green */
+  --secondary-foreground: oklch(0.88 0.04 140);
+  
+  --muted: oklch(0.22 0.025 145);
+  --muted-foreground: oklch(0.62 0.03 100);
+  
+  --accent: oklch(0.55 0.09 145); /* Sage green */
+  --accent-foreground: oklch(0.96 0.01 85);
+  
+  --border: oklch(0.26 0.03 145);
+  --input: oklch(0.22 0.025 145);
+  --ring: oklch(0.74 0.12 85);
+  
+  /* Custom forest colors */
+  --grove: oklch(0.38 0.07 148); /* Deep moss */
+  --grove-foreground: oklch(0.96 0.01 85);
+  --amber: oklch(0.74 0.12 80); /* Warm amber glow */
+  --amber-foreground: oklch(0.14 0.025 145);
+  --moss: oklch(0.45 0.09 145);
+  --sage: oklch(0.55 0.07 150);
+  --bark: oklch(0.35 0.04 55);
+  --cream: oklch(0.94 0.015 85);
 }
 
 @layer base {
@@ -120,74 +87,249 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  /* Hide scrollbar while keeping functionality */
-  .hide-scrollbar {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
 }
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fade-in 200ms ease-out;
+  /* Organic breathing animation - slow, natural, like a forest at rest */
+  .animate-breathe {
+    animation: breathe 7s ease-in-out infinite;
   }
   
-  .animate-slide-up {
-    animation: slide-up 200ms ease-out;
+  /* Heartbeat pulse for active states */
+  .animate-heartbeat {
+    animation: heartbeat 1.4s ease-in-out infinite;
   }
   
-  .animate-slide-down {
-    animation: slide-down 150ms ease-out;
+  /* Listening pulse - gentle expansion */
+  .animate-listening {
+    animation: listening-pulse 2.2s ease-in-out infinite;
   }
   
-  .animate-scale-in {
-    animation: scale-in 200ms ease-out;
+  /* Thinking - ethereal luminance */
+  .animate-thinking {
+    animation: thinking 3s ease-in-out infinite;
   }
   
-  .animate-message-in {
-    animation: message-in 300ms ease-out;
+  /* Speaking - warm radiance */
+  .animate-speaking {
+    animation: speaking-radiance 1.2s ease-in-out infinite;
   }
-
-  .shadow-border-small {
+  
+  /* Soft organic wobble */
+  .animate-wobble {
+    animation: wobble 5s ease-in-out infinite;
+  }
+  
+  /* Growth animation */
+  .animate-grow {
+    animation: grow 1.8s ease-out forwards;
+  }
+  
+  /* Ripple effect */
+  .animate-ripple {
+    animation: ripple 1.5s ease-out forwards;
+  }
+  
+  /* Listening ring expansion - visible pulse waves */
+  .animate-listening-ring {
+    animation: listening-ring 2s ease-out infinite;
+  }
+  
+  /* Particle float */
+  .animate-particle {
+    animation: particle-float 10s ease-in-out infinite;
+  }
+  
+  /* Ambient drift */
+  .animate-drift {
+    animation: drift 18s ease-in-out infinite;
+  }
+  
+  /* Soft inner glow */
+  .glow-ember {
     box-shadow: 
-      0 0 0 1px rgba(0, 0, 0, 0.08),
-      0 1px 2px rgba(0, 0, 0, 0.12);
+      0 0 40px oklch(0.74 0.12 85 / 0.25),
+      0 0 80px oklch(0.74 0.12 85 / 0.12),
+      0 0 120px oklch(0.74 0.12 85 / 0.06),
+      inset 0 0 30px oklch(0.74 0.12 85 / 0.08);
   }
   
-  .shadow-border-medium {
+  .glow-ember-alive {
     box-shadow: 
-      0 0 0 1px rgba(0, 0, 0, 0.08),
-      0 2px 4px rgba(0, 0, 0, 0.12),
-      0 1px 6px rgba(0, 0, 0, 0.05);
+      0 0 50px oklch(0.76 0.14 85 / 0.45),
+      0 0 100px oklch(0.76 0.14 85 / 0.2),
+      0 0 150px oklch(0.76 0.14 85 / 0.1),
+      inset 0 0 40px oklch(0.76 0.14 85 / 0.12);
   }
   
-  .dark .shadow-border-small {
+  .glow-radiant {
     box-shadow: 
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 1px 2px rgba(0, 0, 0, 0.4);
+      0 0 60px oklch(0.78 0.15 85 / 0.5),
+      0 0 120px oklch(0.78 0.15 85 / 0.25),
+      0 0 180px oklch(0.78 0.15 85 / 0.12),
+      0 0 240px oklch(0.65 0.08 90 / 0.06),
+      inset 0 0 50px oklch(0.78 0.15 85 / 0.15);
   }
   
-  .dark .shadow-border-medium {
+  .glow-moss {
     box-shadow: 
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 2px 4px rgba(0, 0, 0, 0.4),
-      0 1px 6px rgba(0, 0, 0, 0.2);
-  }
-
-  .glass-effect {
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+      0 0 30px oklch(0.45 0.09 145 / 0.25),
+      0 0 60px oklch(0.45 0.09 145 / 0.12);
   }
   
-  .dark .glass-effect {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    35% {
+      transform: scale(1.015);
+      filter: brightness(1.03);
+    }
+    65% {
+      transform: scale(1.025);
+      filter: brightness(1.06);
+    }
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    12% {
+      transform: scale(1.03);
+    }
+    24% {
+      transform: scale(0.98);
+    }
+    40% {
+      transform: scale(1.02);
+    }
+  }
+  
+  @keyframes listening-pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 
+        0 0 50px oklch(0.74 0.12 85 / 0.4),
+        0 0 100px oklch(0.74 0.12 85 / 0.2);
+    }
+    50% {
+      transform: scale(1.03);
+      box-shadow: 
+        0 0 70px oklch(0.76 0.14 85 / 0.55),
+        0 0 140px oklch(0.76 0.14 85 / 0.28),
+        0 0 200px oklch(0.76 0.14 85 / 0.12);
+    }
+  }
+  
+  @keyframes thinking {
+    0%, 100% {
+      filter: brightness(1) saturate(1);
+      opacity: 0.92;
+    }
+    50% {
+      filter: brightness(1.12) saturate(1.08);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes speaking-radiance {
+    0%, 100% {
+      transform: scale(1);
+      filter: brightness(1.08);
+    }
+    30% {
+      transform: scale(1.012);
+      filter: brightness(1.16);
+    }
+    70% {
+      transform: scale(0.992);
+      filter: brightness(1.12);
+    }
+  }
+  
+  @keyframes wobble {
+    0%, 100% {
+      transform: rotate(0deg) translateY(0);
+    }
+    20% {
+      transform: rotate(0.3deg) translateY(-0.5px);
+    }
+    80% {
+      transform: rotate(-0.3deg) translateY(0.5px);
+    }
+  }
+  
+  @keyframes grow {
+    0% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    35% {
+      transform: scale(1.1);
+      filter: brightness(1.25);
+    }
+    100% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes listening-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes particle-float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.35;
+    }
+    30% {
+      transform: translateY(-18px) translateX(6px) scale(1.08);
+      opacity: 0.55;
+    }
+    60% {
+      transform: translateY(-28px) translateX(-4px) scale(0.92);
+      opacity: 0.28;
+    }
+    80% {
+      transform: translateY(-12px) translateX(-10px) scale(1.04);
+      opacity: 0.45;
+    }
+  }
+  
+  @keyframes drift {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    30% {
+      transform: translate(12px, -6px) rotate(0.8deg);
+    }
+    60% {
+      transform: translate(-6px, 6px) rotate(-0.4deg);
+    }
+    80% {
+      transform: translate(-12px, -4px) rotate(0.4deg);
+    }
   }
   
   @keyframes fade-in {
@@ -202,7 +344,7 @@
   @keyframes slide-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -210,48 +352,59 @@
     }
   }
   
-  @keyframes slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
+  @keyframes float {
+    0%, 100% {
       transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
     }
   }
   
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
+  @keyframes haze-drift {
+    0%, 100% {
+      transform: translateX(0) scale(1);
+      opacity: 0.18;
     }
-    to {
-      opacity: 1;
-      transform: scale(1);
+    50% {
+      transform: translateX(25px) scale(1.04);
+      opacity: 0.28;
     }
   }
   
-  @keyframes message-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-      filter: blur(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+  .animate-fade-in {
+    animation: fade-in 700ms ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 700ms ease-out;
+  }
+  
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  .animate-haze {
+    animation: haze-drift 20s ease-in-out infinite;
   }
   
   @media (prefers-reduced-motion: reduce) {
+    .animate-breathe,
+    .animate-heartbeat,
+    .animate-listening,
+    .animate-listening-ring,
+    .animate-thinking,
+    .animate-speaking,
+    .animate-wobble,
+    .animate-grow,
+    .animate-ripple,
+    .animate-particle,
+    .animate-drift,
     .animate-fade-in,
     .animate-slide-up,
-    .animate-slide-down,
-    .animate-scale-in,
-    .animate-message-in {
-      animation: fade-in 200ms ease-out;
+    .animate-float,
+    .animate-haze {
+      animation: none;
     }
   }
 }

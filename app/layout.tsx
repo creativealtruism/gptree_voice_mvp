@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,9 +13,65 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
-  title: "AI Gateway Demo",
-  description: "A demo of the Vercel AI Gateway with the AI SDK by Vercel",
+  title: "Talking to Trees | by ChatGPTree",
+  description: "A living voice companion. Speak into the grove.",
+  keywords: [
+    "AI",
+    "voice",
+    "tree planting",
+    "climate",
+    "forest",
+    "meditation",
+    "companion",
+  ],
+  openGraph: {
+    title: "Talking to Trees",
+    description: "A living voice companion. Every conversation can grow a forest.",
+    type: "website",
+    images: [
+      {
+        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/GPTree_ProfilePic%20%281%29%20%281%29-h6bSZ7Mr2IxB30MVPnQzrlSjmaiHlq.png",
+        width: 1080,
+        height: 1080,
+        alt: "Talking to Trees by ChatGPTree",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Talking to Trees",
+    description: "A living voice companion. Every conversation can grow a forest.",
+    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/GPTree_ProfilePic%20%281%29%20%281%29-h6bSZ7Mr2IxB30MVPnQzrlSjmaiHlq.png"],
+  },
+  icons: {
+    icon: [
+      { url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Talking to Trees",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#1a3a2a",
 };
 
 export default function RootLayout({
@@ -24,18 +80,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="bg-background">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased font-sans`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

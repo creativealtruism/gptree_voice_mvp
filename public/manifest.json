@@ -1,0 +1,23 @@
+{
+  "name": "Talking to Trees",
+  "short_name": "Trees",
+  "description": "A living voice companion. Speak into the grove.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d3320",
+  "theme_color": "#1a3a2a",
+  "icons": [
+    {
+      "src": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
