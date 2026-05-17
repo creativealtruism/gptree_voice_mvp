@@ -20,6 +20,24 @@ function generateParticles(count: number) {
 
 const PARTICLES = generateParticles(12);
 
+// 4-leaf motif SVG path (simplified version of the ChatGPTree logo)
+const LeafMotif = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 100 100"
+    className={className}
+    fill="currentColor"
+  >
+    {/* Top left leaf */}
+    <path d="M20 45 C20 25, 35 10, 45 10 L45 45 Z" />
+    {/* Top right leaf */}
+    <path d="M55 10 C65 10, 80 25, 80 45 L55 45 Z" />
+    {/* Bottom left leaf */}
+    <path d="M20 55 C20 75, 35 90, 45 90 L45 55 Z" />
+    {/* Bottom right leaf */}
+    <path d="M55 90 C65 90, 80 75, 80 55 L55 55 Z" />
+  </svg>
+);
+
 export function AmbientBackground() {
   const [mounted, setMounted] = useState(false);
 
@@ -70,6 +88,13 @@ export function AmbientBackground() {
           `,
         }}
       />
+
+      {/* Subtle 4-leaf motif watermark - woven into the grove */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <LeafMotif 
+          className="w-[600px] h-[600px] text-foreground/[0.012] animate-breathe"
+        />
+      </div>
 
       {/* Central warm glow - where the acorn lives */}
       <div

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
+import Image from "next/image";
 import { AppShell } from "@/components/app-shell";
 import { VoiceAcornButton } from "@/components/voice-acorn-button";
 import { VoiceStatus } from "@/components/voice-status";
@@ -58,12 +59,21 @@ export default function ChatGPTreeVoice() {
     [submitText]
   );
 
-  // Show a gentle loading state
+  // Show a gentle loading state with the ChatGPTree icon
   if (!isLoaded) {
     return (
       <AppShell>
         <div className="flex items-center justify-center">
-          <div className="w-20 h-20 rounded-full bg-primary/10 animate-breathe" />
+          <div className="relative w-20 h-20 animate-breathe">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png"
+              alt="Loading"
+              width={80}
+              height={80}
+              className="rounded-2xl opacity-60"
+              priority
+            />
+          </div>
         </div>
       </AppShell>
     );

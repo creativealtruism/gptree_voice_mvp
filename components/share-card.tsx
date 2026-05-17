@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Image from "next/image";
 import { type TreeStage } from "@/lib/use-tree-growth";
 import { trackEvent } from "@/lib/analytics";
 
@@ -124,6 +125,17 @@ chatgptree.ai`;
 
         {/* Card content */}
         <div className="text-center space-y-6">
+          {/* Logo mark at top */}
+          <div className="flex justify-center">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_WhiteBox%20%282%29-zOGS7E936PU926nk3fV8fIXXzeocRM.png"
+              alt="ChatGPTree"
+              width={48}
+              height={48}
+              className="rounded-xl opacity-80"
+            />
+          </div>
+
           {/* Poetic header */}
           <p className="text-foreground/80 text-lg font-light leading-relaxed">
             my conversations are

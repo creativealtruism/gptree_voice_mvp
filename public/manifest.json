@@ -1,0 +1,23 @@
+{
+  "name": "ChatGPTree Voice",
+  "short_name": "ChatGPTree",
+  "description": "A voice-first AI companion. Talk. Grow. Plant. Share.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d3320",
+  "theme_color": "#0d3320",
+  "icons": [
+    {
+      "src": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_GreenBox%20%283%29-9PC5q624T18kiddnKEC8yOPPPBnfIo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
