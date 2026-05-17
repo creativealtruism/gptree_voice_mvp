@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Image from "next/image";
 import { trackEvent } from "@/lib/analytics";
 
 interface ShareCardProps {
@@ -20,13 +19,13 @@ export function ShareCard({
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const shareText = `my conversations are growing a forest.
+  const shareText = `talking to trees.
 
 ${conversationCount} conversations
 ${plantedTrees} real trees planted
 ${treeRings} rings grown
 
-talk. grow. plant. share.
+every conversation can grow a forest.
 
 chatgptree.ai`;
 
@@ -37,7 +36,7 @@ chatgptree.ai`;
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "ChatGPTree Voice",
+          title: "Talking to Trees",
           text: shareText,
           url: "https://chatgptree.ai",
         });
@@ -122,22 +121,21 @@ chatgptree.ai`;
 
         {/* Card content */}
         <div className="text-center space-y-6">
-          {/* Logo mark at top */}
-          <div className="flex justify-center">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Icon_WhiteBox%20%282%29-zOGS7E936PU926nk3fV8fIXXzeocRM.png"
-              alt="ChatGPTree"
-              width={48}
-              height={48}
-              className="rounded-xl opacity-80"
-            />
+          {/* Title - cinematic treatment */}
+          <div className="flex flex-col items-center gap-1">
+            <h2 className="font-serif text-xl text-foreground/85 tracking-wide">
+              Talking to Trees
+            </h2>
+            <span className="text-[9px] text-muted-foreground/40 tracking-[0.3em] uppercase font-sans">
+              by ChatGPTree
+            </span>
           </div>
 
           {/* Poetic header */}
-          <p className="text-foreground/80 text-lg font-light leading-relaxed">
+          <p className="text-foreground/70 text-base font-light leading-relaxed">
             my conversations are
             <br />
-            <span className="text-primary">growing a forest</span>
+            <span className="text-primary font-serif italic">growing a forest</span>
           </p>
 
           {/* Stats - subtle, not dashboard-like */}
@@ -174,7 +172,7 @@ chatgptree.ai`;
 
           {/* Tagline */}
           <p className="text-[10px] text-muted-foreground/30 tracking-widest uppercase">
-            talk. grow. plant. share.
+            every conversation can grow a forest
           </p>
         </div>
       </div>

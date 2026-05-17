@@ -9,17 +9,17 @@ type VoiceStatusProps = {
   error: string | null;
 };
 
-// Poetic, calm status messages - editorial tone
+// Poetic, calm status messages - like meditation prompts
 function getStatusText(voiceState: VoiceState): string {
   switch (voiceState) {
     case "idle":
-      return "Tap the acorn. Ask anything.";
+      return "Speak into the grove.";
     case "listening":
       return "listening...";
     case "transcribing":
-      return "hearing you...";
+      return "the forest hears you...";
     case "thinking":
-      return "the grove stirs...";
+      return "roots are stirring...";
     case "speaking":
       return "";
     case "error":
@@ -29,18 +29,18 @@ function getStatusText(voiceState: VoiceState): string {
   }
 }
 
-// Calm fallback messages for errors
+// Calm fallback messages for errors - warm, not technical
 function getErrorMessage(error: string | null): string | null {
   if (!error) return null;
   
   if (error.toLowerCase().includes("microphone") || error.toLowerCase().includes("permission")) {
-    return "Voice feels shy right now. You can type below.";
+    return "The grove waits quietly. You can type below.";
   }
   if (error.toLowerCase().includes("network") || error.toLowerCase().includes("connection")) {
-    return "The forest is quiet. Try again in a moment.";
+    return "The forest is resting. Try again in a moment.";
   }
   if (error.toLowerCase().includes("not supported")) {
-    return "This grove prefers typing. Speak through words below.";
+    return "This grove prefers written words.";
   }
   
   return "A gentle pause. Try again.";
