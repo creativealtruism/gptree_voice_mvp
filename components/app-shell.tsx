@@ -2,7 +2,6 @@
 
 import { ReactNode } from "react";
 import { AmbientBackground } from "./ambient-background";
-import Image from "next/image";
 
 interface AppShellProps {
   children: ReactNode;
@@ -23,7 +22,8 @@ export function AppShell({ children }: AppShellProps) {
         <span className="text-[9px] text-muted-foreground/70 tracking-[0.25em] uppercase font-light">
           powered by
         </span>
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPTree_Logo_Green-epolkFgxlHY4isyaH6pfK54z9hFP07.png"
           alt="ChatGPTree"
           width={120}
